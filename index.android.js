@@ -12,7 +12,18 @@ var {
   View,
 } = React;
 
+var GcmAndroid = require('react-native-gcm-android');
+
 var TestGcm = React.createClass({
+  componentDidMount: function() {
+    GcmAndroid.addEventListener('register', function(token){
+      console.log('send gcm token to server', token);
+    });
+    GcmAndroid.addEventListener('notification', function(notification){
+      console.log('receive gcm notification', notification);
+    });
+    GcmAndroid.requestPermissions();
+  },
   render: function() {
     return (
       <View style={styles.container}>
