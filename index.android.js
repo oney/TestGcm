@@ -16,24 +16,18 @@ var GcmAndroid = require('react-native-gcm-android');
 import Notification from 'react-native-system-notification';
 
 if (GcmAndroid.launchNotification) {
+  console.log('GcmAndroid.launchNotification:', GcmAndroid.launchNotification);
   var notification = GcmAndroid.launchNotification;
-  var info = notification.info;
-  console.log('sfdasdfasfsdafaasdfasdfasf11111-33');
-  // GcmAndroid.createNotification();
+  var info = JSON.parse(notification.info);
   Notification.create({
     subject: info.subject,
     message: info.message,
     sound: 'default',
   });
   GcmAndroid.stopService();
-  console.log('asdfhasufhkasdhf fsdaff4', GcmAndroid.launchNotification);
 } else {
-
-  // var GcmAndroid = require('react-native-gcm-android');
-
   var TestGcm = React.createClass({
     componentDidMount: function() {
-      Notification.create({ subject: 'Hey', message: 'Yo! Hello world.' });
       GcmAndroid.addEventListener('register', function(token){
         console.log('send gcm token to server', token);
       });
