@@ -7,6 +7,6 @@
   },
   "dependencies": {
     "react-native": "^0.16.0",
-    "react-native-gcm-android": "oney/react-native-gcm-android#handle-notification-in-js"
+    "react-native-gcm-android": "0.1.0"
   }
 }
