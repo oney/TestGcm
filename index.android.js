@@ -19,10 +19,12 @@ if (GcmAndroid.launchNotification) {
   console.log('GcmAndroid.launchNotification:', GcmAndroid.launchNotification);
   var notification = GcmAndroid.launchNotification;
   var info = JSON.parse(notification.info);
-  Notification.create({
+  GcmAndroid.createNotification({
     subject: info.subject,
     message: info.message,
-    sound: 'default',
+    largeIcon: 'ic_launcher',
+    autoCancel: true,
+    ticker: 'new notification!',
   });
   GcmAndroid.stopService();
 } else {
@@ -33,6 +35,17 @@ if (GcmAndroid.launchNotification) {
       });
       GcmAndroid.addEventListener('notification', function(notification){
         console.log('receive gcm notification', notification);
+        console.log('GcmAndroid.isForground', GcmAndroid.isForground);
+        var info = JSON.parse(notification.data.info);
+        if (!GcmAndroid.isForground) {
+          GcmAndroid.createNotification({
+            subject: info.subject,
+            message: info.message,
+            largeIcon: 'ic_launcher',
+            autoCancel: true,
+            ticker: 'new notification!',
+          });
+        }
       });
       GcmAndroid.requestPermissions();
     },
@@ -43,7 +56,7 @@ if (GcmAndroid.launchNotification) {
             Welcome to React Native!
           </Text>
           <Text style={styles.instructions}>
-            To get started, edit index.android.js3
+            To get started, edit index.android.js
           </Text>
           <Text style={styles.instructions}>
             Shake or press menu button for dev menu
