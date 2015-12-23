@@ -13,7 +13,6 @@ var {
 } = React;
 
 var GcmAndroid = require('react-native-gcm-android');
-import Notification from 'react-native-system-notification';
 
 if (GcmAndroid.launchNotification) {
   console.log('GcmAndroid.launchNotification:', GcmAndroid.launchNotification);
