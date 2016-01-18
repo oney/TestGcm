@@ -10,20 +10,19 @@ var {
   StyleSheet,
   Text,
   View,
+  DeviceEventEmitter,
 } = React;
 
 var GcmAndroid = require('react-native-gcm-android');
+import Notification from 'react-native-system-notification';
 
 if (GcmAndroid.launchNotification) {
   console.log('GcmAndroid.launchNotification:', GcmAndroid.launchNotification);
   var notification = GcmAndroid.launchNotification;
   var info = JSON.parse(notification.info);
-  GcmAndroid.createNotification({
+  Notification.create({
     subject: info.subject,
     message: info.message,
-    largeIcon: 'ic_launcher',
-    autoCancel: true,
-    ticker: 'new notification!',
   });
   GcmAndroid.stopService();
 } else {
@@ -37,14 +36,15 @@ if (GcmAndroid.launchNotification) {
         console.log('GcmAndroid.isInForeground', GcmAndroid.isInForeground);
         var info = JSON.parse(notification.data.info);
         if (!GcmAndroid.isInForeground) {
-          GcmAndroid.createNotification({
+          Notification.create({
             subject: info.subject,
             message: info.message,
-            largeIcon: 'ic_launcher',
-            autoCancel: true,
-            ticker: 'new notification!',
           });
         }
+      });
+
+      DeviceEventEmitter.addListener('sysNotificationClick', function(e) {
+        console.log('sysNotificationClick', e);
       });
       GcmAndroid.requestPermissions();
     },

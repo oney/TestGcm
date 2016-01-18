@@ -7,6 +7,6 @@
   },
   "dependencies": {
     "react-native": "^0.17.0",
-    "react-native-gcm-android": "0.1.6"
+    "react-native-gcm-android": "0.1.7"
   }
 }
