@@ -31,6 +31,9 @@ if (GcmAndroid.launchNotification) {
       GcmAndroid.addEventListener('register', function(token){
         console.log('send gcm token to server', token);
       });
+      GcmAndroid.addEventListener('registerError', function(error){
+        console.log('registerError', error.message);
+      });
       GcmAndroid.addEventListener('notification', function(notification){
         console.log('receive gcm notification', notification);
         console.log('GcmAndroid.isInForeground', GcmAndroid.isInForeground);

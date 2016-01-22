@@ -48,7 +48,9 @@
           <action android:name="com.google.android.c2dm.intent.RECEIVE" />
         </intent-filter>
       </service>
-        <receiver android:name="com.oney.gcm.GcmBroadcastReceiver">
+        <receiver
+          android:exported="false"
+          android:name="com.oney.gcm.GcmBroadcastReceiver">
             <intent-filter>
                 <action android:name="com.oney.gcm.GCMReceiveNotification" />
             </intent-filter>
